@@ -248,7 +248,8 @@ section,.foot{position:relative;z-index:1}
   var en=document.getElementById('enterArchive'),va=document.getElementById('vault');
   if(en){en.addEventListener('click',function(){va.classList.add('open');en.style.display='none'})}
   var f=document.getElementById('inqForm'),th=document.getElementById('thanks');
-  if(f&&th&&/[?&]sent=1/.test(location.search)){f.style.display='none';th.style.display='block';var _iq=document.getElementById('inquiry');if(_iq)_iq.scrollIntoView();}
+  if(f&&th&&/[?&]sent=1/.test(location.search)){f.style.display='none';th.style.display='block';var _iq=document.getElementById('inquiry');if(_iq)_iq.scrollIntoView();try{history.replaceState(null,'',location.pathname);}catch(e){}}
+  if(f&&th){f.addEventListener('submit',function(ev){ev.preventDefault();var b=f.querySelector('.submit');if(b){b.disabled=true;b.textContent='Sending…';}fetch('https://formsubmit.co/ajax/contato.rafaelcassaro@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).then(function(r){return r.json();}).then(function(j){if(j&&String(j.success)==='true'){f.style.display='none';th.style.display='block';var q=document.getElementById('inquiry');if(q)q.scrollIntoView({behavior:'smooth',block:'center'});}else{f.submit();}}).catch(function(){f.submit();});});}
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.14});document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)})}
   else{document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')})}
 })();
