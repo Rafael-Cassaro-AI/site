@@ -224,17 +224,17 @@ section,.foot{position:relative;z-index:1}
       <a class="foot__ig" href="https://instagram.com/rafaelcassaro" target="_blank" rel="noopener">@rafaelcassaro <span>&mdash; message on Instagram</span></a>
     </div>
     <div>
-      <form class="form" id="inqForm" novalidate>
+      <form class="form" id="inqForm" action="https://formsubmit.co/contato.rafaelcassaro@gmail.com" method="POST" enctype="multipart/form-data"><input type="hidden" name="_subject" value="New inquiry — rafaelcassaro.com"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://rafaelcassaro.com/?sent=1"><input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="row2">
-          <div class="field"><label for="nm">Name</label><input id="nm" type="text" autocomplete="name"></div>
-          <div class="field"><label for="em">Email</label><input id="em" type="email" autocomplete="email"></div>
+          <div class="field"><label for="nm">Name</label><input id="nm" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email"></div>
         </div>
         <div class="row2">
-          <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" autocomplete="tel"></div>
-          <div class="field"><label for="pl">Placement</label><input id="pl" type="text" placeholder="arm, ribs, back…"></div>
+          <div class="field"><label for="ph">Phone</label><input id="ph" name="phone" type="tel" autocomplete="tel" required></div>
+          <div class="field"><label for="pl">Placement</label><input id="pl" name="placement" type="text" placeholder="arm, ribs, back…"></div>
         </div>
-        <div class="field"><label for="ms">What you want tattooed</label><textarea id="ms" placeholder="Describe the idea and the story behind it."></textarea></div>
-        <div class="row2"><div class="field"><label for="ref">Reference images</label><input id="ref" class="file" type="file" accept="image/*" multiple><span class="hint">Anything that inspires the piece &mdash; art, photos, sketches.</span></div><div class="field"><label for="area">Photo of the area</label><input id="area" class="file" type="file" accept="image/*" multiple><span class="hint">The spot on your body you&rsquo;d like tattooed, if you can.</span></div></div>
+        <div class="field"><label for="ms">What you want tattooed</label><textarea id="ms" name="message" placeholder="Describe the idea and the story behind it."></textarea></div>
+        <div class="row2"><div class="field"><label for="ref">Reference images</label><input id="ref" name="reference" class="file" type="file" accept="image/*" multiple><span class="hint">Anything that inspires the piece &mdash; art, photos, sketches.</span></div><div class="field"><label for="area">Photo of the area</label><input id="area" name="area" class="file" type="file" accept="image/*" multiple><span class="hint">The spot on your body you&rsquo;d like tattooed, if you can.</span></div></div>
         <button class="submit" type="submit">Send inquiry</button>
       </form>
       <p class="thanks" id="thanks">Thank you. Your inquiry is with me. I will be in touch personally.</p>
@@ -249,7 +249,7 @@ section,.foot{position:relative;z-index:1}
   var en=document.getElementById('enterArchive'),va=document.getElementById('vault');
   if(en){en.addEventListener('click',function(){va.classList.add('open');en.style.display='none'})}
   var f=document.getElementById('inqForm'),th=document.getElementById('thanks');
-  if(f){f.addEventListener('submit',function(e){e.preventDefault();f.style.display='none';th.style.display='block'})}
+  if(f&&th&&/[?&]sent=1/.test(location.search)){f.style.display='none';th.style.display='block';var _iq=document.getElementById('inquiry');if(_iq)_iq.scrollIntoView();}
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.14});document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)})}
   else{document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')})}
 })();
