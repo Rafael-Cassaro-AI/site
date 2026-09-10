@@ -2,6 +2,15 @@
 <!-- Google tag (gtag.js) — GA4 Rafael Cassaro Tattooz (mesma propriedade do site ao vivo) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8E5WEGMQY"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P8E5WEGMQY');</script>
+<!-- Meta Pixel (Rafael Cassaro) — reinstalado 2026-09-10. Parou de disparar em 11/jul, quando o site novo subiu. -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1041136256084209');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=1041136256084209&ev=PageView&noscript=1"></noscript>
+<!-- fim do Meta Pixel -->
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rafael Cassaro &mdash; Authored Black &amp; Grey Tattoo &middot; Boca Raton, FL</title>
 <meta name="description" content="Complete black and grey sleeves and large-scale, authored tattoo in Boca Raton, Florida. By commission, built over months. 5.0 on Google. Eternal Ink artist.">
@@ -630,6 +639,7 @@ form{display:flex;flex-direction:column;gap:16px}
         .then(function(j){
           if(!(j&&String(j.success)==='true'))throw new Error('rejected');
           try{if(window.gtag)gtag('event','generate_lead',{form_location:'site_inquiry',currency:'USD',value:1});}catch(e){}
+          try{if(window.fbq)fbq('track','Lead',{content_name:'site_inquiry'});}catch(e){}
           f.style.display='none';th.style.display='block';
           try{th.focus();th.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
         })
