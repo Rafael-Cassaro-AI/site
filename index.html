@@ -716,7 +716,14 @@ form{display:flex;flex-direction:column;gap:16px}
             }
             var topoFrase=frase.getBoundingClientRect().top;
             var fimFoto=hImg.getBoundingClientRect().bottom;
-            esq.style.height=Math.max(0,Math.round(fimFoto-topoFrase))+'px';
+            var sobra=fimFoto-topoFrase;
+            var linha=parseFloat(getComputedStyle(frase).lineHeight)||24;
+            // Ordem do Rafael (11/set): "se vc vai usar o texto passando por baixo da
+            // tatuagem entao faca ele todo, nao quebre o black and grey sleeves".
+            // Se a sobreposicao for menor que ~1 linha e meia, desviar so serve pra
+            // picotar a primeira frase sem ganho nenhum (ali a foto ja esta quase preta
+            // por causa do escurecimento). Nesse caso o texto vai inteiro, largura cheia.
+            esq.style.height=(sobra>linha*1.5)?Math.round(sobra)+'px':'0px';
           }
         }
         return;
