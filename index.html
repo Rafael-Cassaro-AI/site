@@ -90,7 +90,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
   linear-gradient(0deg,var(--ground) 0%,rgba(10,10,11,.86) 12%,rgba(10,10,11,.42) 22%,rgba(10,10,11,0) 32%),
   linear-gradient(180deg,rgba(10,10,11,.60) 0%,rgba(10,10,11,0) 15%)}
 .intro{position:absolute;top:57%;bottom:auto;left:0;transform:none;max-width:46%;padding:0 clamp(20px,5vw,64px);z-index:3}
-.h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,7.4vw,116px);line-height:.92;letter-spacing:.02em;text-wrap:balance;text-shadow:0 2px 30px rgba(0,0,0,.65)}
+.h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,9.2vw,200px);line-height:.9;letter-spacing:.01em;text-wrap:balance;text-shadow:0 2px 34px rgba(0,0,0,.72)}
 .rule{width:52px;height:1px;background:var(--accent);margin:26px 0 24px;opacity:.85}
 .thesis{max-width:34ch;font-size:clamp(15px,1.15vw,17px);line-height:1.62;color:var(--ink-dim);font-weight:300;text-shadow:0 1px 16px rgba(0,0,0,.7)}
 .thesis b{color:var(--ink);font-weight:400}
@@ -105,14 +105,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 @media(min-width:821px){
   .hero{height:auto;min-height:100svh;overflow:visible}
   .hero__media{position:absolute;top:0;left:0;right:0;height:100svh}
-  .hero__img{width:100%;height:100%;object-fit:contain;object-position:center}.intro{top:var(--introTop,74vh);bottom:auto;max-width:48%}
+  .hero__img{width:100%;height:100%;object-fit:contain;object-position:center}.intro{top:var(--introTop,74vh);bottom:auto;max-width:58%}
   .intro .eyebrow{margin-bottom:14px}.intro .rule{margin:20px 0 20px}.intro .thesis{margin-top:0}.intro .ctas{margin-top:32px}
 }
 /* PT: versao compacta do bloco do hero. NAO e media query de altura fixa (isso quebrava
    em 1440x900): quem liga essa classe e o JS, medindo se o bloco cabe na primeira tela.
    Assim vale pra qualquer notebook, qualquer zoom e qualquer tamanho de texto. */
 @media(min-width:821px){
-  .intro.compacto .h1{font-size:clamp(44px,5.2vw,72px)}
+  .intro.compacto .h1{font-size:clamp(50px,7.2vw,112px)}
   .intro.compacto .eyebrow{margin-bottom:8px}
   .intro.compacto .rule{margin:11px 0 11px}
   .intro.compacto .thesis{font-size:15px;line-height:1.5;max-width:40ch}
@@ -618,7 +618,10 @@ form{display:flex;flex-direction:column;gap:16px}
     // Agora: mantem o queixo quando CABE, e so sobe o necessario pra tudo aparecer na
     // primeira tela. Piso em 0.56 da imagem pra nunca invadir o rosto velado da esquerda.
     // A IMAGEM SEGUE INTOCADA: nada de esticar, recortar ou reposicionar.
-    var CHIN=0.79, TETO=0.53, FOLGA=30;
+    // TETO era 0.53 pra nao encostar no rosto velado. Ordem do Rafael (11/set):
+    // "pode fazer o nome maior e sobrepor parte do rosto nao tem problema".
+    // Agora o piso so serve pra nao colidir com o menu do topo.
+    var CHIN=0.79, TETO=0.22, FOLGA=30;
     var hHero=document.querySelector('.hero');
     function placeIntro(){
       if(window.innerWidth<821){
