@@ -134,6 +134,27 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
   .intro.compacto .cta-main{font-size:16px}
 }
 @media(max-width:820px){.hero{display:block}.hero__scrim{display:block}.intro{position:relative;top:auto;transform:none;max-width:none;margin-top:-7.5vw;padding:0 26px 56px;z-index:3}.herometa{display:none}}
+/* ===== HERO NO CELULAR — foto INTEIRA, texto POR CIMA do rosto velado =====
+   Medido na propria imagem: o rosto velado ocupa 15%-40% da largura e a TATUAGEM
+   comeca em 58%. Por isso o texto e limitado a 56%: cobre o rosto (liberado pelo
+   Rafael) e para antes da tatuagem. object-fit contain: nada recortado, nada esticado. */
+@media(max-width:820px){
+  .hero{position:relative}
+  .hero__media{height:auto;overflow:visible}
+  .hero__img{width:100%;height:auto;object-fit:contain;display:block}
+  /* escurecimento so na METADE ESQUERDA, pra dar leitura ao texto sem apagar a tatuagem */
+  .hero__scrim{background:
+    linear-gradient(90deg, rgba(10,10,11,.72) 0%, rgba(10,10,11,.55) 38%, rgba(10,10,11,0) 62%),
+    linear-gradient(180deg, rgba(10,10,11,0) 62%, rgba(10,10,11,.85) 88%, #0a0a0b 100%)}
+  /* sobe o bloco pra cima da imagem e trava a largura antes da tatuagem */
+  .intro{margin-top:-158px;max-width:56%;padding:0 0 56px 26px}
+  .intro .h1{font-size:9.4vw;line-height:.96}
+  .intro .eyebrow{font-size:9.5px;letter-spacing:.16em;margin-bottom:11px;line-height:1.7}
+  .intro .rule{margin:16px 0 14px}
+  /* a frase e os botoes voltam a largura cheia, ja estao fora da imagem */
+  .intro .thesis{max-width:none;width:calc(100vw - 52px)}
+  .intro .ctas{width:calc(100vw - 52px)}
+}
 
 /* ---------- shared section frame ---------- */
 .sec{padding:clamp(56px,9vw,120px) clamp(22px,6vw,96px);position:relative}
