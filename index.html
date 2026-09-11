@@ -677,8 +677,26 @@ form{display:flex;flex-direction:column;gap:16px}
     var hHero=document.querySelector('.hero');
     function placeIntro(){
       if(window.innerWidth<821){
+        // ---- CELULAR ----
+        // Ordem do Rafael (11/set): o bloco estava baixo demais e sobrava um vazio
+        // enorme em cima (medido: 237px contra 56px embaixo). Aqui o nome e CENTRADO
+        // por calculo no espaco entre o cabecalho e o fim da foto. Nao e numero fixo:
+        // a foto muda de altura com a largura da tela, entao um px cravado quebraria
+        // em outro aparelho.
         hIntro.classList.remove('compacto');
-        hIntro.style.removeProperty('--introTop');if(hHero)hHero.style.minHeight='';return;
+        hIntro.style.removeProperty('--introTop');
+        if(hHero)hHero.style.minHeight='';
+        var hHdr=document.querySelector('.hdr');
+        var fimCabecalho=hHdr?hHdr.getBoundingClientRect().height:78;
+        var alturaFoto=hImg.getBoundingClientRect().height;
+        var eb=hIntro.querySelector('.eyebrow'), h1=hIntro.querySelector('.h1');
+        if(alturaFoto&&eb&&h1){
+          var blocoNome=(h1.getBoundingClientRect().bottom-eb.getBoundingClientRect().top);
+          var espaco=alturaFoto-fimCabecalho;
+          var topoIdeal=fimCabecalho+Math.max(0,(espaco-blocoNome)/2);
+          hIntro.style.marginTop=Math.round(topoIdeal-alturaFoto)+'px';
+        }
+        return;
       }
       var vw=window.innerWidth,vh=window.innerHeight;
       var nw=hImg.naturalWidth||2400,nh=hImg.naturalHeight||1697,ar=nw/nh,dispH,top;
