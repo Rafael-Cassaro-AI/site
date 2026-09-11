@@ -256,6 +256,9 @@ form{display:flex;flex-direction:column;gap:16px}
 /* ---------- FOOTER ---------- */
 .foot{padding:44px clamp(22px,6vw,96px) 120px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .foot p{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+.foot a{text-decoration:underline;text-decoration-color:var(--gold-fio);text-underline-offset:3px;transition:color .25s}
+.foot a:hover{color:var(--ink-dim)}
+.form__hint a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold-fio);text-underline-offset:3px}
 @media(max-width:820px){.foot{padding-bottom:150px}}
 
 /* ---------- THE ARTIST (bio / heranca — a substancia que vende quem ele e) ---------- */
@@ -606,7 +609,7 @@ form{display:flex;flex-direction:column;gap:16px}
           <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email"></div>
           <div class="field"><label for="ph">Mobile phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(561) 000-0000"></div>
           <div class="field"><label for="ms">What do you have in mind?</label><textarea id="ms" name="message" placeholder="Placement, idea, size, timing…"></textarea></div>
-          <p class="form__hint">Leave at least one way to reach you. The consultation is on me.</p>
+          <p class="form__hint">Leave at least one way to reach you. The consultation is on me. Your note goes straight to my inbox and nowhere else &mdash; <a href="privacy/">how I handle it</a>.</p>
           <p class="form__err" id="inqErr" role="alert" hidden></p>
           <button class="submit" type="submit" id="sub">Send inquiry</button>
         </form>
@@ -618,7 +621,7 @@ form{display:flex;flex-direction:column;gap:16px}
   <!-- ===== FOOTER ===== -->
   <footer class="foot">
     <p>&copy; Rafael Cassaro Tattooz &middot; Boca Raton, FL</p>
-    <p>By commission &middot; @rafaelcassaro</p>
+    <p>By commission &middot; @rafaelcassaro &middot; <a href="privacy/">Privacy</a></p>
   </footer>
 
   <!-- ===== MOBILE STICKY CTA BAR ===== -->
