@@ -36,6 +36,7 @@ fbq('init','3471288283157644');fbq('track','PageView');</script>
 :root{
   --ground:#0a0a0b;--ink:#f4f2ee;--ink-dim:#a9a49c;--ink-faint:#837c73;
   --line:rgba(244,242,238,.14);--line-soft:rgba(244,242,238,.08);--accent:#cfc9c0;
+  --gold:#c8b184;--gold-fio:rgba(200,177,132,.5);--gold-texto:rgba(200,177,132,.65);
   --serif:"Didot","Hoefler Text","Bodoni 72","Bodoni MT",Georgia,"Times New Roman",serif;
   --sans:"Neue Haas Grotesk Display","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
 }
@@ -54,22 +55,22 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:1000px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
 
 .open{padding:clamp(130px,17vw,210px) 0 clamp(48px,7vw,80px)}
-.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.5rem}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-texto);margin-bottom:1.5rem}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(3rem,10vw,6.4rem);line-height:.94;letter-spacing:-.01em}
 .lede{margin-top:clamp(1.8rem,4vw,2.6rem);max-width:60ch;font-size:clamp(1rem,2.1vw,1.16rem);line-height:1.78;color:var(--ink-dim)}
 .lede b{color:var(--ink);font-weight:500}
-.rule{width:100px;height:1px;background:var(--line);margin:clamp(2.4rem,6vw,3.4rem) 0}
+.rule{width:100px;height:1px;background:var(--gold-fio);margin:clamp(2.4rem,6vw,3.4rem) 0}
 
 .plate{margin:0 auto clamp(10px,2vw,18px);background:#0d0d0e;border:1px solid var(--line-soft)}
 .plate img{width:100%;height:auto;display:block}
 .note{max-width:46ch;margin:clamp(2.2rem,5vw,3rem) auto clamp(3.4rem,8vw,5rem);
   font-family:var(--serif);font-size:clamp(1.28rem,3.3vw,1.82rem);line-height:1.5;text-align:center;color:var(--ink)}
 .note span{display:block;margin-top:.9rem;font-family:var(--sans);font-size:11px;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--ink-faint)}
+  text-transform:uppercase;color:var(--gold-texto)}
 
 .colophon{border-top:1px solid var(--line);margin-top:clamp(2rem,5vw,3rem);padding:clamp(2.6rem,6vw,4rem) 0}
 .colophon dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(1.4rem,4vw,2.6rem)}
-.colophon dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.55rem}
+.colophon dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-texto);margin-bottom:.55rem}
 .colophon dd{font-family:var(--serif);font-size:1.18rem;color:var(--ink)}
 
 .close{padding:clamp(3rem,8vw,5rem) 0 clamp(4rem,10vw,6rem);text-align:center;border-top:1px solid var(--line)}

@@ -60,6 +60,12 @@ fbq('init','3471288283157644');fbq('track','PageView');</script>
 :root{
   --ground:#0a0a0b;--ink:#f4f2ee;--ink-dim:#a9a49c;--ink-faint:#837c73;
   --line:rgba(244,242,238,.14);--line-soft:rgba(244,242,238,.08);--accent:#cfc9c0;
+  /* OURO (ordem do Rafael 2026-09-11, revoga a regra antiga de "sem dourado").
+     Superficie pequena so: fio, borda, rotulo do arquivo. Nunca em bloco.
+     50% = 3,11:1, serve pra fio. 65% = 4,52:1, passa AA e serve pra texto. */
+  --gold:#c8b184;--gold-fio:rgba(200,177,132,.5);--gold-texto:rgba(200,177,132,.65);
+  /* bandas de setor: o MESMO ouro diluido no preto, vira preto quente, nao cor */
+  --banda:#151412;--banda-forte:#1d1b17;
   --serif:"Didot","Hoefler Text","Bodoni 72","Bodoni MT",Georgia,"Times New Roman",serif;
   --sans:"Neue Haas Grotesk Display","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
 }
@@ -91,7 +97,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
   linear-gradient(180deg,rgba(10,10,11,.60) 0%,rgba(10,10,11,0) 15%)}
 .intro{position:absolute;top:57%;bottom:auto;left:0;transform:none;max-width:46%;padding:0 clamp(20px,5vw,64px);z-index:3}
 .h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,9.2vw,200px);line-height:.9;letter-spacing:.01em;text-wrap:balance;text-shadow:0 2px 34px rgba(0,0,0,.72)}
-.rule{width:52px;height:1px;background:var(--accent);margin:26px 0 24px;opacity:.85}
+.rule{width:52px;height:1px;background:var(--gold-fio);margin:26px 0 24px;opacity:1}
 .thesis{max-width:34ch;font-size:clamp(15px,1.15vw,17px);line-height:1.62;color:var(--ink-dim);font-weight:300;text-shadow:0 1px 16px rgba(0,0,0,.7)}
 .thesis b{color:var(--ink);font-weight:400}
 .eyebrow.label{text-shadow:0 1px 12px rgba(0,0,0,.7)}
@@ -124,6 +130,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 /* ---------- shared section frame ---------- */
 .sec{padding:clamp(56px,9vw,120px) clamp(22px,6vw,96px);position:relative}
 .sec--line{border-top:1px solid var(--line-soft)}
+/* as duas salas diferentes do site: o arquivo e o investimento.
+   A banda clareia o fundo, entao o cinza fraco e o ouro precisam subir junto,
+   senao caem abaixo de 4,5:1 e a legibilidade regride. Valores calculados. */
+#archive{background:var(--banda-forte);--ink-faint:#8a837a;--gold-texto:rgba(200,177,132,.69)}
+#commissions{background:var(--banda);--ink-faint:#857e75;--gold-texto:rgba(200,177,132,.67)}
 .sec__eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.4rem}
 .sec__title{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,54px);line-height:1.02;letter-spacing:.01em;max-width:16ch}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
@@ -257,7 +268,7 @@ form{display:flex;flex-direction:column;gap:16px}
 .concept p b{color:var(--ink);font-weight:400}
 .arch__entry{margin-top:clamp(2.2rem,4.5vw,3.2rem);border-top:1px solid var(--line-soft);padding-top:1.8rem}
 .arch__meta{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:1.3rem}
-.arch__n{font-family:var(--serif);font-size:15px;color:var(--ink-faint);letter-spacing:.05em}
+.arch__n{font-family:var(--serif);font-size:15px;color:var(--gold-texto);letter-spacing:.05em}
 .arch__t{font-family:var(--serif);font-size:clamp(20px,2.8vw,27px);color:var(--ink)}
 .arch__c{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
 .arch__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -266,7 +277,7 @@ form{display:flex;flex-direction:column;gap:16px}
 .arch__img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(70%) contrast(1.04);transition:filter .5s ease,transform .5s ease}
 .arch__plate:hover .arch__img{filter:grayscale(45%);transform:scale(1.03)}
 .arch__credit{text-align:center;margin-top:16px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
-.arch__enter{margin-top:1.8rem;display:inline-block;font-family:var(--serif);font-size:17px;padding-bottom:6px;border-bottom:1px solid var(--accent);transition:letter-spacing .3s}
+.arch__enter{margin-top:1.8rem;display:inline-block;font-family:var(--serif);font-size:17px;padding-bottom:6px;color:var(--gold-texto);border-bottom:1px solid var(--gold-fio);transition:letter-spacing .3s}
 .arch__enter:hover{letter-spacing:.06em}
 
 /* ---------- COMMISSIONS (menu de comissao, tom galeria — sem dourado) ---------- */
@@ -280,7 +291,7 @@ form{display:flex;flex-direction:column;gap:16px}
 .crow__amt{display:block;font-family:var(--serif);font-size:clamp(19px,2.8vw,27px);color:var(--ink);line-height:1}
 .crow__amt.quiet{font-style:italic;color:var(--ink-dim);font-size:clamp(16px,2.2vw,21px)}
 .crow__unit{display:block;margin-top:.5rem;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
-.crow__from{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.4rem}
+.crow__from{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-texto);margin-bottom:.4rem}
 .crow__tag{display:inline-block;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:#0a0a0b;background:var(--accent);padding:.34em .72em;border-radius:1px;margin-bottom:.7rem}
 .crow.focus{background:linear-gradient(90deg,rgba(244,242,238,.06),rgba(244,242,238,0) 72%);margin:0 clamp(-1rem,-3vw,-1.6rem);padding-left:clamp(1rem,3vw,1.6rem);padding-right:clamp(1rem,3vw,1.6rem);border-top-color:var(--line)}
 .comm__terms{margin-top:clamp(1.8rem,4vw,2.6rem);font-size:13.5px;letter-spacing:.02em;line-height:1.72;color:var(--ink-faint);max-width:62ch}
