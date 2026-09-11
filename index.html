@@ -692,8 +692,11 @@ form{display:flex;flex-direction:column;gap:16px}
         var eb=hIntro.querySelector('.eyebrow'), h1=hIntro.querySelector('.h1');
         if(alturaFoto&&eb&&h1){
           var blocoNome=(h1.getBoundingClientRect().bottom-eb.getBoundingClientRect().top);
+          // 0.32 e nao 0.5: o Rafael pediu "mais pra cima" (11/set). Fica acima do
+          // centro optico, com um piso de 16px pra nunca encostar no cabecalho.
           var espaco=alturaFoto-fimCabecalho;
-          var topoIdeal=fimCabecalho+Math.max(0,(espaco-blocoNome)/2);
+          var folga=Math.max(16,(espaco-blocoNome)*0.32);
+          var topoIdeal=fimCabecalho+Math.max(0,folga);
           hIntro.style.marginTop=Math.round(topoIdeal-alturaFoto)+'px';
         }
         return;
