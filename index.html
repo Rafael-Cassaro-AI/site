@@ -156,6 +156,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
   /* bloco invisivel que ocupa a faixa da tatuagem (58%->100%): o texto desvia dele
      enquanto a foto existe e volta a largura cheia logo abaixo. Altura vem do JS. */
   .intro .thesis .esquiva{float:right;width:44%;height:0}
+  /* ordem do Rafael (11/set): "ponha a palavra WORN na linha de baixo junto com todo
+     conjunto" — a frase em destaque comeca numa linha propria, inteira. */
+  .intro .thesis b{display:block;margin-top:.42em}
   .intro .ctas{width:calc(100vw - 52px)}
 }
 
@@ -724,6 +727,19 @@ form{display:flex;flex-direction:column;gap:16px}
             // picotar a primeira frase sem ganho nenhum (ali a foto ja esta quase preta
             // por causa do escurecimento). Nesse caso o texto vai inteiro, largura cheia.
             esq.style.height=(sobra>linha*1.5)?Math.round(sobra)+'px':'0px';
+            // Ordem do Rafael (11/set): o trecho "Complete ... months." tem que caber
+            // em DUAS linhas. Nao da pra cravar um px: a largura util muda com a tela
+            // e com o desvio da tatuagem. Entao a fonte e reduzida ate caber em 2.
+            var primeiro=frase.firstChild;
+            while(primeiro&&primeiro.nodeType!==3)primeiro=primeiro.nextSibling;
+            if(primeiro){
+              var conta=function(){var r=document.createRange();r.selectNodeContents(primeiro);
+                return [].slice.call(r.getClientRects()).filter(function(x){return x.width>2;}).length;};
+              frase.style.fontSize='';
+              var px=parseFloat(getComputedStyle(frase).fontSize);
+              var piso=px*0.78;           // nunca encolher demais
+              while(conta()>2&&px>piso){px-=0.5;frase.style.fontSize=px+'px';}
+            }
           }
         }
         return;
