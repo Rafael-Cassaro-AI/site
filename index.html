@@ -569,7 +569,7 @@ form{display:flex;flex-direction:column;gap:16px}
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="https://rafaelcassaro.com/?sent=1">
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-          <div class="field"><label for="nm">Name <i>required</i></label><input id="nm" type="text" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="nm">Name</label><input id="nm" type="text" name="name" autocomplete="name"></div>
           <div class="field"><label for="ig">Instagram</label><input id="ig" type="text" name="instagram" autocomplete="off" placeholder="@yourhandle"></div>
           <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email"></div>
           <div class="field"><label for="ph">Mobile phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(561) 000-0000"></div>
@@ -624,30 +624,39 @@ form{display:flex;flex-direction:column;gap:16px}
   if(f&&th){
     var val=function(n){var e=f.elements[n];return e?String(e.value).trim():'';};
     var fail=function(msg){if(er){er.textContent=msg;er.hidden=false;er.scrollIntoView({behavior:'smooth',block:'center'});}};
+    // PT: REGRA DESTE HANDLER — nunca falhar em silencio e nunca barrar gente de verdade.
+    // O unico motivo pra nao enviar e a pessoa nao ter deixado NENHUM contato.
+    // Spam quem filtra e o FormSubmit no servidor (campo _honey), nunca este codigo.
+    var ok=function(){
+      try{if(window.gtag)gtag('event','generate_lead',{form_location:'site_inquiry',currency:'USD',value:1});}catch(e){}
+      try{if(window.fbq)fbq('track','Lead',{content_name:'site_inquiry'});}catch(e){}
+      f.style.display='none';th.style.display='block';
+      try{th.focus();th.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
+    };
     f.addEventListener('submit',function(ev){
       ev.preventDefault();
       var b=document.getElementById('sub');
       if(b&&b.disabled)return;
-      if(val('_honey'))return;                       // bot
-      var nm=val('name'),em=val('email'),ph=val('phone'),ig=val('instagram');
-      if(!nm)return fail('Please add your name.');
+      var em=val('email'),ph=val('phone'),ig=val('instagram');
       if(!em&&!ph&&!ig)return fail('Please leave one way to reach you: email, phone or Instagram.');
-      if(em&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))return fail('That email address looks incomplete.');
-      if(ph&&(ph.replace(/\D/g,'').length<10))return fail('That phone number looks incomplete.');
+      if(em&&!ph&&!ig&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em))
+        return fail('That email looks incomplete, and it is the only way I would have to reach you.');
       if(er)er.hidden=true;
       if(b){b.disabled=true;b.textContent='Sending…';}
+      // rede de seguranca: se o AJAX for bloqueado, travar ou demorar, cai no POST nativo,
+      // que sai do navegador do mesmo jeito e volta em /?sent=1 mostrando o agradecimento.
+      var pronto=false;
+      var rede=setTimeout(function(){if(!pronto){pronto=true;f.submit();}},12000);
       fetch('https://formsubmit.co/ajax/contato.rafaelcassaro@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
         .then(function(r){return r.json();})
         .then(function(j){
+          if(pronto)return; pronto=true; clearTimeout(rede);
           if(!(j&&String(j.success)==='true'))throw new Error('rejected');
-          try{if(window.gtag)gtag('event','generate_lead',{form_location:'site_inquiry',currency:'USD',value:1});}catch(e){}
-          try{if(window.fbq)fbq('track','Lead',{content_name:'site_inquiry'});}catch(e){}
-          f.style.display='none';th.style.display='block';
-          try{th.focus();th.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
+          ok();
         })
         .catch(function(){
-          if(b){b.disabled=false;b.textContent='Send inquiry';}
-          fail('Something went wrong sending that. Please try again, or text me at (561) 419-3996.');
+          if(pronto)return; pronto=true; clearTimeout(rede);
+          f.submit();
         });
     });
   }
