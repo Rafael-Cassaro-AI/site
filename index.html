@@ -85,6 +85,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 .nav{display:flex;gap:clamp(18px,2vw,30px)}
 .nav a{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);transition:color .25s;text-shadow:0 1px 10px rgba(0,0,0,.6)}
 .nav a:hover{color:var(--ink)}
+.nav a[href="#inquiry"]{color:var(--ink);border:1px solid rgba(244,242,238,.32);border-radius:2px;
+  padding:9px 17px;margin-left:8px;transition:background .3s,border-color .3s,color .3s}
+.nav a[href="#inquiry"]:hover,.nav a[href="#inquiry"]:focus-visible{background:var(--ink);color:#0a0a0b;border-color:var(--ink)}
 @media(max-width:820px){.nav{display:none}.brand img{height:40px}}
 
 /* ---------- HERO (TRAVADO — reaproveitado da home aprovada) ---------- */
@@ -104,8 +107,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 .ctas{display:flex;align-items:center;gap:28px;margin-top:44px;flex-wrap:wrap}
 .cta-main{font-family:var(--serif);font-size:18px;padding-bottom:7px;border-bottom:1px solid var(--accent);transition:letter-spacing .3s;text-shadow:0 1px 16px rgba(0,0,0,.7)}
 .cta-main:hover{letter-spacing:.06em}
-.cta-alt{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);transition:color .25s;text-shadow:0 1px 12px rgba(0,0,0,.7)}
-.cta-alt:hover{color:var(--ink)}
+/* PT: ACAO PRINCIPAL do site = pedir orcamento. Branco de alto contraste,
+   NUNCA ouro: ouro significa o arquivo, e a 50-69% ele tem MENOS contraste
+   que o branco, ou seja, destacaria menos justamente o que mais importa. */
+.cta-alt{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);
+  border:1px solid rgba(244,242,238,.42);border-radius:2px;padding:14px 30px;
+  transition:background .3s,border-color .3s,color .3s;text-shadow:none}
+.cta-alt:hover,.cta-alt:focus-visible{background:var(--ink);color:#0a0a0b;border-color:var(--ink)}
 .herometa{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;align-items:center;justify-content:flex-end;padding:0 clamp(20px,5vw,64px) 28px;pointer-events:none}
 .scrollcue{writing-mode:vertical-rl;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-faint)}
 @media(min-width:821px){
@@ -297,8 +305,10 @@ form{display:flex;flex-direction:column;gap:16px}
 .comm__terms{margin-top:clamp(1.8rem,4vw,2.6rem);font-size:13.5px;letter-spacing:.02em;line-height:1.72;color:var(--ink-faint);max-width:62ch}
 .comm__epi{margin-top:clamp(2rem,5vw,3rem);font-family:var(--serif);font-style:italic;font-size:clamp(18px,3vw,25px);color:var(--ink);text-wrap:balance;max-width:22ch}
 .comm__cta{margin-top:1.8rem}
-.comm__cta a{font-family:var(--serif);font-size:18px;padding-bottom:7px;border-bottom:1px solid var(--accent);transition:letter-spacing .3s}
-.comm__cta a:hover{letter-spacing:.06em}
+.comm__cta a{display:inline-block;font-family:var(--sans);font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink);border:1px solid rgba(244,242,238,.42);border-radius:2px;
+  padding:15px 32px;transition:background .3s,border-color .3s,color .3s}
+.comm__cta a:hover,.comm__cta a:focus-visible{background:var(--ink);color:#0a0a0b;border-color:var(--ink)}
 @media(max-width:520px){.crow{grid-template-columns:1fr;gap:.2rem}.crow__price{text-align:left;margin-top:.8rem}.crow__desc{margin-top:.5rem}}
 
 /* ---------- MOBILE STICKY CTA BAR ( acao sempre a mao) ---------- */
