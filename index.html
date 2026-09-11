@@ -153,6 +153,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
   .intro .rule{margin:16px 0 14px}
   /* a frase e os botoes voltam a largura cheia, ja estao fora da imagem */
   .intro .thesis{max-width:none;width:calc(100vw - 52px)}
+  /* bloco invisivel que ocupa a faixa da tatuagem (58%->100%): o texto desvia dele
+     enquanto a foto existe e volta a largura cheia logo abaixo. Altura vem do JS. */
+  .intro .thesis .esquiva{float:right;width:44%;height:0}
   .intro .ctas{width:calc(100vw - 52px)}
 }
 
@@ -698,6 +701,23 @@ form{display:flex;flex-direction:column;gap:16px}
           var folga=Math.max(16,(espaco-blocoNome)*0.32);
           var topoIdeal=fimCabecalho+Math.max(0,folga);
           hIntro.style.marginTop=Math.round(topoIdeal-alturaFoto)+'px';
+          // Ordem do Rafael (11/set): "nao passe o texto na frente da tatuagem,
+          // quebre ele onde tem o work e faca o restante em uma linha pra baixo".
+          // Em vez de estreitar a frase inteira (ficaria alta e magra), um bloco
+          // invisivel flutua na area da tatuagem: as primeiras linhas desviam dela e,
+          // assim que passam a altura da foto, o texto volta a largura cheia.
+          var frase=hIntro.querySelector('.thesis');
+          if(frase){
+            var esq=frase.querySelector('.esquiva');
+            if(!esq){
+              esq=document.createElement('span');
+              esq.className='esquiva';esq.setAttribute('aria-hidden','true');
+              frase.insertBefore(esq,frase.firstChild);
+            }
+            var topoFrase=frase.getBoundingClientRect().top;
+            var fimFoto=hImg.getBoundingClientRect().bottom;
+            esq.style.height=Math.max(0,Math.round(fimFoto-topoFrase))+'px';
+          }
         }
         return;
       }
