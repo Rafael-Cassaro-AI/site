@@ -797,20 +797,66 @@ form{display:flex;flex-direction:column;gap:16px}
         return fail('That email looks incomplete, and it is the only way I would have to reach you.');
       if(er)er.hidden=true;
       if(b){b.disabled=true;b.textContent='Sending…';}
-      // rede de seguranca: se o AJAX for bloqueado, travar ou demorar, cai no POST nativo,
-      // que sai do navegador do mesmo jeito e volta em /?sent=1 mostrando o agradecimento.
+      // PT: ENTREGA EM 3 CAMADAS — o lead NUNCA pode depender de um servico so.
+      //   1) SUPABASE (banco do Rafael, via /api/contact). Fonte da verdade.
+      //   2) FormSubmit (e-mail). So como aviso/backup.
+      //   3) Se os dois falharem, mostrar os contatos diretos em vez de sumir.
+      // Motivo: em 30/09/2026 o FormSubmit ficou fora do ar (500 em tudo) e o
+      // formulario parou de entregar. Servico gratuito de terceiro nao pode ser
+      // ponto unico de falha do unico canal de captacao do site.
       var pronto=false;
+      var API='https://cadastro-clientes-ten.vercel.app/api/contact';
+
+      var payload={
+        name:val('name'),
+        email:em,
+        phone:ph,
+        instagram:ig,
+        message:val('message'),
+        source:'site_inquiry'
+      };
+
+      var avisaEmail=function(){
+        // dispara e esquece: se o e-mail falhar, o lead ja esta salvo no banco.
+        try{
+          fetch('https://formsubmit.co/ajax/contato.rafaelcassaro@gmail.com',
+            {method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)}).catch(function(){});
+        }catch(e){}
+      };
+
+      var semSaida=function(){
+        if(b){b.disabled=false;b.textContent='Send';}
+        fail('Something went wrong on my end and your message did not go through. Please reach me directly on Instagram @rafaelcassaro or call (561) 419-3996, and I will take it from there.');
+      };
+
+      // rede de seguranca por tempo: se tudo travar, tenta o POST nativo do FormSubmit.
       var rede=setTimeout(function(){if(!pronto){pronto=true;f.submit();}},12000);
-      fetch('https://formsubmit.co/ajax/contato.rafaelcassaro@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
-        .then(function(r){return r.json();})
+
+      fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){return r.json().catch(function(){return {};});})
         .then(function(j){
-          if(pronto)return; pronto=true; clearTimeout(rede);
-          if(!(j&&String(j.success)==='true'))throw new Error('rejected');
+          if(pronto)return;
+          if(!(j&&j.ok===true))throw new Error('api_rejected');
+          pronto=true; clearTimeout(rede);
+          avisaEmail();   // banco ja tem o lead; e-mail e so o aviso
           ok();
         })
         .catch(function(){
-          if(pronto)return; pronto=true; clearTimeout(rede);
-          f.submit();
+          // Camada 2: banco falhou, tenta o e-mail como caminho principal.
+          if(pronto)return;
+          fetch('https://formsubmit.co/ajax/contato.rafaelcassaro@gmail.com',
+            {method:'POST',headers:{'Accept':'application/json'},body:new FormData(f)})
+            .then(function(r){return r.json();})
+            .then(function(j2){
+              if(pronto)return;
+              if(!(j2&&String(j2.success)==='true'))throw new Error('rejected');
+              pronto=true; clearTimeout(rede); ok();
+            })
+            .catch(function(){
+              // Camada 3: os dois caminhos morreram. Nao deixar a pessoa sumir.
+              if(pronto)return; pronto=true; clearTimeout(rede);
+              semSaida();
+            });
         });
     });
   }
