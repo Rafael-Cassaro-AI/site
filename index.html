@@ -172,7 +172,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:1px solid var
 #commissions{background:var(--banda);--ink-faint:#857e75;--gold-texto:rgba(200,177,132,.67)}
 .sec__eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.4rem}
 .sec__title{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,54px);line-height:1.02;letter-spacing:.01em;max-width:16ch}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+/* O conteudo NASCE VISIVEL (corrigido 01/10/2026). O esconde-pra-animar vale so
+   quando o JS esta vivo e marcou o <html> com .js. Antes, a opacidade zero vinha
+   do CSS puro: se o script quebrasse, metade da pagina ficava invisivel e o
+   visitante via um site vazio. Conteudo nunca depende de JS pra existir. */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1!important;transform:none!important;transition:none!important}*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 .reveal.in{opacity:1;transform:none}
 
@@ -354,7 +358,21 @@ form{display:flex;flex-direction:column;gap:16px}
 .mbar a:last-child{border-right:0}
 .mbar a.pri{color:#0a0a0b;background:var(--ink);font-weight:600}
 @media(max-width:820px){.mbar{display:grid}}
-</style></head>
+</style>
+<script>
+/* Liga o esconde-pra-animar SO com JS vivo, e arma a rede de seguranca aqui no
+   <head>, antes de qualquer codigo que possa quebrar la embaixo. Se em 4s algo
+   nao tiver sido revelado, revela na forca. Pior cenario possivel = animacao
+   perdida. O conteudo aparece sempre. */
+document.documentElement.className+=' js';
+setTimeout(function(){
+  try{
+    var p=document.querySelectorAll('.reveal:not(.in)');
+    for(var i=0;i<p.length;i++)p[i].className+=' in';
+  }catch(e){}
+},4000);
+</script>
+</head>
 
 <body class="page" id="top">
   <header class="hdr">
@@ -570,6 +588,13 @@ form{display:flex;flex-direction:column;gap:16px}
     </div>
 
     <p class="comm__terms reveal">A $500 deposit holds any booking and comes off your final session. Archive Commissions are held with a 25% deposit. Payment by cash, Zelle, card, or Affirm.</p>
+    <!-- PT: ⛔ NAO PUBLICAR A AGENDA AQUI. Ordem do Rafael (01/10/2026): "nao quero
+         que contenha minha agenda no site isso eh pra mim nao pro cliente ele tem
+         que se adaptar ao que tenho e ofereco". A regra do horizonte de agenda
+         (10/set) vale pra MENSAGEM DIRETA, onde ela segura o lead numa conversa.
+         No site ela viraria promessa publica e inverteria a posicao. Nada de mes,
+         nada de disponibilidade, nada de "booking for X". -->
+
     <p class="comm__epi reveal">You don't buy a Cassaro. You are collected into one.</p>
     <p class="comm__cta reveal"><a href="#inquiry">Start your inquiry &rarr;</a></p>
   </section>
@@ -643,7 +668,7 @@ form{display:flex;flex-direction:column;gap:16px}
           <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email"></div>
           <div class="field"><label for="ph">Mobile phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(561) 000-0000"></div>
           <div class="field"><label for="ms">What do you have in mind?</label><textarea id="ms" name="message" placeholder="Placement, idea, size, timing…"></textarea></div>
-          <p class="form__hint">Leave at least one way to reach you. The consultation is on me. Your note goes straight to my inbox and nowhere else. <a href="privacy/">Read the privacy policy</a>.</p>
+          <p class="form__hint">Leave at least one way to reach you. Name is optional. The consultation is on me. Your note goes to my own private records and my inbox, and nowhere else. <a href="privacy/">Read the privacy policy</a>.</p>
           <p class="form__err" id="inqErr" role="alert" hidden></p>
           <button class="submit" type="submit" id="sub">Send inquiry</button>
         </form>
