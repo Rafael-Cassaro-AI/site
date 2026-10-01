@@ -284,7 +284,9 @@ form{display:flex;flex-direction:column;gap:16px}
 .lb__prev{left:2px;top:50%;transform:translateY(-50%)}
 .lb__next{right:2px;top:50%;transform:translateY(-50%)}
 .lb__close{top:10px;right:10px;font-size:30px}
-.tile,.arch__plate{cursor:zoom-in}
+.tile{cursor:zoom-in}
+/* As placas da Archive agora NAVEGAM (o card e um link), nao abrem lightbox. */
+.arch__card{cursor:pointer}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* ---------- FOOTER ---------- */
@@ -314,13 +316,26 @@ form{display:flex;flex-direction:column;gap:16px}
 .concept h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.6vw,52px);line-height:1.04;margin:1.2rem 0 1.4rem;color:var(--ink)}
 .concept p{font-size:15px;line-height:1.76;color:var(--ink-dim);font-weight:300;max-width:60ch}
 .concept p b{color:var(--ink);font-weight:400}
-.arch__entry{margin-top:clamp(2.2rem,4.5vw,3.2rem);border-top:1px solid var(--line-soft);padding-top:1.8rem}
-.arch__meta{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:1.3rem}
-.arch__n{font-family:var(--serif);font-size:15px;color:var(--gold-texto);letter-spacing:.05em}
-.arch__t{font-family:var(--serif);font-size:clamp(20px,2.8vw,27px);color:var(--ink)}
-.arch__c{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
-.arch__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-@media(max-width:820px){.arch__grid{grid-template-columns:repeat(2,1fr)}}
+/* PT: ARCHIVE COM VARIOS PROJETOS (01/10/2026, pedido do Rafael).
+   Antes era UMA entrada de 4 fotos com o link "Enter the archive" embaixo.
+   Agora cada archive e um CARD de 2 fotos, o card inteiro e o link, e o nome
+   fica SOBRE as fotos. O link de baixo saiu. Cabem 2 por linha no desktop e
+   empilham no celular; um terceiro archive entra sem mexer no CSS. */
+.arch__rail{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.6vw,30px);
+  margin-top:clamp(2.2rem,4.5vw,3.2rem);border-top:1px solid var(--line-soft);padding-top:clamp(1.8rem,3.4vw,2.4rem)}
+@media(max-width:820px){.arch__rail{grid-template-columns:1fr;gap:28px}}
+.arch__card{position:relative;display:block}
+.arch__pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* O nome sobre a foto. O degrade existe pra garantir leitura: sem ele o texto
+   claro some em cima de pele clara. Ouro so no numero, em fio fino. */
+.arch__over{position:absolute;left:0;right:0;bottom:0;padding:clamp(2.6rem,7vw,4rem) 16px clamp(14px,2.4vw,20px);
+  text-align:center;pointer-events:none;
+  background:linear-gradient(to top,rgba(10,10,11,.93) 0%,rgba(10,10,11,.72) 42%,rgba(10,10,11,0) 100%)}
+.arch__n{display:block;font-family:var(--serif);font-size:13px;color:var(--gold-texto);letter-spacing:.05em;margin-bottom:.3rem}
+.arch__t{display:block;font-family:var(--serif);font-size:clamp(23px,3.1vw,31px);color:var(--ink);line-height:1.1;
+  transition:letter-spacing .35s ease}
+.arch__c{display:block;margin-top:.55rem;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
+.arch__card:hover .arch__t,.arch__card:focus-visible .arch__t{letter-spacing:.045em}
 .arch__plate{position:relative;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--line-soft);background:#0d0d0e}
 .arch__img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(70%) contrast(1.04);transition:filter .5s ease,transform .5s ease}
 .arch__plate:hover .arch__img{filter:grayscale(45%);transform:scale(1.03)}
@@ -499,23 +514,38 @@ setTimeout(function(){
       <h2>A record, not a feed.</h2>
       <p>This is not a collection of tattoos. It is a record of trust, time and artistic collaboration. Some projects naturally become part of my journey, not because they were planned as something special, but because the relationship, the process and the final work carried a presence that deserved to be kept. <b>If a piece enters the archive, it earned its place.</b></p>
     </div>
-    <div class="arch__entry reveal">
-      <div class="arch__meta">
-        <span class="arch__n">N&#186; 01</span>
-        <span class="arch__t">The Wing</span>
-        <span class="arch__c">Black &amp; grey &middot; side &middot; Boca Raton</span>
-      </div>
-      <!-- PT: MESMOS frames do home aprovado (ensaio The Wing / Marlene, raw/ENSAIO MARLENE).
-           Otimizados em assets/archive/01..04.jpg. Arco: conversa -> stencil -> horas -> asa pronta. -->
-      <div class="arch__grid">
-        <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/01.jpg" alt="The Wing — the conversation"></div>
-        <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/02.jpg" alt="The Wing — the stencil"></div>
-        <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/03.jpg" alt="The Wing — the hours"></div>
-        <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/04.jpg" alt="The Wing — the finished wing"></div>
-      </div>
-      <p class="arch__credit">Photography &mdash; Gerusa Younes</p>
-      <a class="arch__enter" href="archive/the-wing/">Enter the archive &rarr;</a>
+    <!-- PT: cada archive = 2 fotos, card inteiro clicavel, nome SOBRE as fotos.
+         Wing: 01 (a conversa) + 04 (a asa pronta). Blade: o processo + o cliente
+         com a peca pronta. Em cada par, a 1a foto conta o processo e a 2a o
+         resultado, pra o par ja narrar sozinho. -->
+    <div class="arch__rail">
+
+      <a class="arch__card reveal" href="archive/the-wing/" aria-label="The Wing — enter this archive">
+        <div class="arch__pair">
+          <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/01.jpg" alt="Rafael Cassaro going through the sketchbook with Marlene before the first session"></div>
+          <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/04.jpg" alt="The finished wing in black and grey across her shoulder"></div>
+        </div>
+        <span class="arch__over">
+          <span class="arch__n">N&#186; 01</span>
+          <span class="arch__t">The Wing</span>
+          <span class="arch__c">Black &amp; grey &middot; side</span>
+        </span>
+      </a>
+
+      <a class="arch__card reveal" href="archive/the-blade/" aria-label="The Blade — enter this archive">
+        <div class="arch__pair">
+          <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/the-blade-home/01.jpg" alt="Rafael Cassaro working the first pass over the stencil on the forearm"></div>
+          <div class="arch__plate"><img class="arch__img" loading="lazy" width="933" height="1400" src="assets/archive/the-blade-home/02.jpg" alt="The client looking down at the finished skull and blade on his forearm"></div>
+        </div>
+        <span class="arch__over">
+          <span class="arch__n">N&#186; 02</span>
+          <span class="arch__t">The Blade</span>
+          <span class="arch__c">Black &amp; grey &middot; forearm</span>
+        </span>
+      </a>
+
     </div>
+    <p class="arch__credit">Photography &mdash; Gerusa Younes</p>
   </section>
 
   <!-- ===== PROCESS — 3 passos, aquece e justifica alto ticket ===== -->
@@ -910,7 +940,9 @@ setTimeout(function(){
   }
 
   // ---------- LIGHTBOX (portfolio + archive) ----------
-  var shots=[].slice.call(document.querySelectorAll('.tile__img,.arch__img'));
+  // Só o portfólio abre lightbox. As fotos da Archive agora são link de
+  // navegação (o card inteiro leva pra página do projeto), então ficam de fora.
+  var shots=[].slice.call(document.querySelectorAll('.tile__img'));
   if(shots.length){
     var lb=document.createElement('div');
     lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Image viewer');
