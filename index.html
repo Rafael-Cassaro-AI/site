@@ -59,117 +59,65 @@ fbq('init','3471288283157644');fbq('track','PageView');</script>
     <a class="navsheet__minor" href="privacy/">Privacy policy</a>
   </div>
 
-  <!-- ===== HERO — TRAVADO. A imagem segue INTOCADA (ordem do Rafael, 12/jul):
-       nada de esticar, recortar ou reposicionar. So saiu do base64 pra arquivo,
-       byte por byte igual, porque 225 KB inline se multiplicariam por 5 paginas. -->
-  <section class="hero">
-    <div class="hero__media"><img class="hero__img" src="assets/hero.jpg" width="2400" height="1697" fetchpriority="high" alt="Rafael Cassaro black and grey work">
-      <div class="hero__scrim"></div>
-    </div>
-    <div class="intro">
-      <div class="eyebrow label">Tattooing &nbsp;&middot;&nbsp; Fine Art &nbsp;&middot;&nbsp; Boca Raton, Florida</div>
-      <h1 class="h1">RAFAEL<br>CASSARO</h1>
-      <div class="rule"></div>
-      <p class="thesis">Authored black and grey, built over months for one person only. <b>Worn for life.</b></p>
-      <div class="ctas"><a class="cta-main" href="work/">See the work</a><a class="cta-alt" href="inquiry/">Start a commission</a></div>
-    </div>
-    <div class="herometa"><span class="scrollcue">Scroll</span></div>
-  </section>
-
-  <!-- ===== HOOK — quem + o que + onde, imediato (resolve os 12s do GA4) ===== -->
-  <section class="hook sec--line reveal">
-    <p class="hook__stmt"><b>Black &amp; grey realism.</b> Portraits and large-scale work, built across sessions.</p>
-    <p class="hook__sub">By commission &nbsp;&middot;&nbsp; One person at a time</p>
-    <div class="proof">
-      <div class="proof__cell">
-        <div class="proof__star">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="proof__k">5.0 on Google</div>
-        <div class="proof__s">Verified reviews</div>
-      </div>
-      <div class="proof__cell">
-        <div class="proof__k" style="margin-top:0">Expo Juror</div>
-        <div class="proof__s">Empire State &middot; Golden State</div>
-      </div>
-      <div class="proof__cell">
-        <div class="proof__k" style="margin-top:0">Eternal Ink</div>
-        <div class="proof__s">Sponsored artist</div>
-      </div>
-      <div class="proof__cell">
-        <div class="proof__k" style="margin-top:0">25+ years</div>
-        <div class="proof__s">Across three continents</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CARROSSEL — o coracao visual da home (briefing 03/10) =====
-       6 imagens numa progressao: peca forte -> escala -> composicao ->
-       fine art -> manga -> o autor. Troca a cada 4,8s, para em hover/foco. -->
-  <section class="car" aria-roledescription="carousel" aria-label="Selected work" tabindex="0">
+  <!-- ===== CARROSSEL — a obra e a primeira coisa na tela =====
+       v2 (04/10): o hero saiu da home por decisao do Rafael, sobre a estrutura
+       da referencia. A home abre no carrossel CONTIDO, nao numa cena sangrada,
+       e termina em pouco mais de uma tela. A imagem que era o hero virou o
+       primeiro slide. Troca a cada 4,8s, para em hover e em foco. -->
+  <section class="car car--first" aria-roledescription="carousel" aria-label="Selected work" tabindex="0">
     <div class="car__stage">
-      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="1 of 6: Portrait">
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="1 of 7: Rafael Cassaro" data-cap="Rafael Cassaro" data-sub="Black & grey">
+        <img class="car__img" src="assets/hero.jpg" loading="lazy" width="2400" height="1697" decoding="async" alt="Black and grey work by Rafael Cassaro">
+      </div>
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="2 of 7: Portrait" data-cap="Portrait" data-sub="Upper arm">
         <img class="car__img" src="assets/works/09.jpg" loading="lazy" width="1400" height="1400" decoding="async" alt="Black and grey tattoo of an elderly man's weathered portrait">
-        <div class="car__cap"><span class="car__capt">Portrait</span><span class="car__caps">Upper arm</span></div>
       </div>
-      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="2 of 6: The Tiger">
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="3 of 7: The Tiger" data-cap="The Tiger" data-sub="Full back">
         <img class="car__img" src="assets/works/11.jpg" loading="lazy" width="787" height="1400" decoding="async" alt="Full back black and grey tattoo of a tiger's face">
-        <div class="car__cap"><span class="car__capt">The Tiger</span><span class="car__caps">Full back</span></div>
       </div>
-      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="3 of 6: The Warrior">
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="4 of 7: The Warrior" data-cap="The Warrior" data-sub="Upper arm">
         <img class="car__img" src="assets/works/02.jpg" loading="lazy" width="933" height="1400" decoding="async" alt="Black and grey tattoo of an Aztec warrior mask with an all-seeing eye">
-        <div class="car__cap"><span class="car__capt">The Warrior</span><span class="car__caps">Upper arm</span></div>
       </div>
-      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="4 of 6: The Bust">
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="5 of 7: The Bust" data-cap="The Bust" data-sub="Forearm">
         <img class="car__img" src="assets/works/12.jpg" loading="lazy" width="787" height="1106" decoding="async" alt="Black and grey tattoo of a cracked classical marble bust">
-        <div class="car__cap"><span class="car__capt">The Bust</span><span class="car__caps">Forearm</span></div>
       </div>
-      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="5 of 6: The Eye">
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="6 of 7: The Eye" data-cap="The Eye" data-sub="Upper arm">
         <img class="car__img" src="assets/works/04.jpg" loading="lazy" width="933" height="1400" decoding="async" alt="Black and grey tattoo of Egyptian hieroglyphs and an eye inside a triangle">
-        <div class="car__cap"><span class="car__capt">The Eye</span><span class="car__caps">Upper arm</span></div>
       </div>
-      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="6 of 6: The hand behind it">
+      <div class="car__slide" role="group" aria-roledescription="slide" aria-label="7 of 7: The hand behind it" data-cap="The hand behind it" data-sub="Boca Raton, Florida">
         <img class="car__img" src="assets/artist/portrait.jpg" loading="lazy" width="933" height="1400" decoding="async" alt="Rafael Cassaro at work in the studio">
-        <div class="car__cap"><span class="car__capt">The hand behind it</span><span class="car__caps">Boca Raton, Florida</span></div>
       </div>
     </div>
+    <p class="car__cap"><span class="car__capt"></span><span class="car__caps"></span></p>
     <button class="car__nav car__prev" type="button" aria-label="Previous image">&#8249;</button>
     <button class="car__nav car__next" type="button" aria-label="Next image">&#8250;</button>
     <div class="car__track" role="tablist" aria-label="Choose image">
-      <button class="car__bar" type="button" role="tab" aria-label="Show image 1: Portrait"></button>
-      <button class="car__bar" type="button" role="tab" aria-label="Show image 2: The Tiger"></button>
-      <button class="car__bar" type="button" role="tab" aria-label="Show image 3: The Warrior"></button>
-      <button class="car__bar" type="button" role="tab" aria-label="Show image 4: The Bust"></button>
-      <button class="car__bar" type="button" role="tab" aria-label="Show image 5: The Eye"></button>
-      <button class="car__bar" type="button" role="tab" aria-label="Show image 6: The hand behind it"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 1: Rafael Cassaro"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 2: Portrait"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 3: The Tiger"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 4: The Warrior"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 5: The Bust"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 6: The Eye"></button>
+      <button class="car__bar" type="button" role="tab" aria-label="Show image 7: The hand behind it"></button>
     </div>
   </section>
 
-  <section class="ctaband reveal">
-    <p class="ctaband__k">Every piece begins with a conversation, not a price list.</p>
-    <p class="ctaband__s">Tell me what you have in mind. I read every inquiry personally and reply with the next step, usually a consultation.</p>
+  <!-- ===== A ACAO, antes da assinatura (ordem da referencia) ===== -->
+  <section class="ctaonly">
     <a class="cta-xl" href="inquiry/">Start a commission</a>
   </section>
 
-  <!-- ===== CONVITES — a home apresenta, as paginas aprofundam ===== -->
-  <div class="invites invites--3">
-    <a class="invite reveal" href="work/">
-      <span class="invite__k">Work</span>
-      <span class="invite__t">The pieces speak first</span>
-      <span class="invite__d">Portraits, sleeves and large-scale compositions in black and grey.</span>
-      <span class="invite__go">See the work &rarr;</span>
-    </a>
-    <a class="invite reveal" href="archive/">
-      <span class="invite__k">Archive</span>
-      <span class="invite__t">A record, not a feed</span>
-      <span class="invite__d">The few projects that earned a place of their own. Documented, kept, shown.</span>
-      <span class="invite__go">Enter the archive &rarr;</span>
-    </a>
-    <a class="invite reveal" href="artist/">
-      <span class="invite__k">Artist</span>
-      <span class="invite__t">The artist stays in shadow</span>
-      <span class="invite__d">Santo Andr&eacute; to Boca Raton. Three continents, one language.</span>
-      <span class="invite__go">Read his story &rarr;</span>
-    </a>
-  </div>
+  <!-- ===== IDENTIDADE — nome, oficio, lugar. Nada mais. =====
+       O texto inteiro da home cabe aqui, por decisao do Rafael (corte da
+       referencia). O hook, as quatro provas e os blocos de convite sairam:
+       as provas foram pra pagina ARTIST, e o caminho pras outras paginas
+       e o menu. -->
+  <section class="ident">
+    <h1 class="ident__name">RAFAEL CASSARO</h1>
+    <div class="rule"></div>
+    <p class="ident__line">Tattooing &nbsp;&middot;&nbsp; Fine Art &nbsp;&middot;&nbsp; Boca Raton, Florida</p>
+    <p class="ident__line">By commission &nbsp;&middot;&nbsp; Black &amp; grey &nbsp;&middot;&nbsp; 25+ years across three continents</p>
+  </section>
 
   <footer class="foot">
     <p>&copy; Rafael Cassaro Tattooz &middot; Boca Raton, FL</p>

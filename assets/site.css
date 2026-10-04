@@ -468,3 +468,65 @@ form{display:flex;flex-direction:column;gap:16px}
 .form__step{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-texto);margin-bottom:.8rem}
 /* tres convites na home (Work / Archive / Artist) */
 @media(min-width:821px){.invites--3{grid-template-columns:repeat(3,1fr)}}
+
+/* ==========================================================================
+   v2 — ESTRUTURA DA REFERENCIA (marcinizyn.com), aprovada pelo Rafael 04/10.
+   O hero saiu da home: ela abre no carrossel CONTIDO e termina em pouco mais
+   de uma tela. Estetica continua nossa (preto, serif, ouro so em fio).
+   ========================================================================== */
+
+/* ---------- CARROSSEL CONTIDO ----------
+   Deixa de sangrar ate a borda: ganha margem dos dois lados e respira, como
+   na referencia. object-fit CONTAIN e deliberado — nossas obras sao verticais
+   e a imagem do antigo hero e horizontal; com cover, uma das duas sempre seria
+   recortada. Contain mostra cada peca INTEIRA sobre o preto, que e como uma
+   galeria pendura trabalho. Nenhuma imagem e distorcida ou cortada. */
+.car{margin:0 auto;max-width:1180px;padding:clamp(14px,3vw,28px) clamp(14px,3vw,28px) 0;background:none}
+.car__stage{aspect-ratio:4/5;background:#0d0d0e;border:1px solid var(--line-soft)}
+@media(min-width:821px){.car__stage{aspect-ratio:auto;height:min(70vh,720px)}}
+.car__img{object-fit:contain;filter:grayscale(55%) contrast(1.04)}
+/* a legenda sai de cima da obra e vai pra baixo do quadro: sobre contain ela
+   cairia em cima da faixa preta, parecendo erro de alinhamento */
+.car__cap{position:static;background:none;padding:14px 2px 0;text-align:center;display:flex;
+  flex-direction:column;align-items:center;gap:.3rem}
+.car__capt{font-size:13px;color:var(--ink-dim)}
+.car__caps{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+.car__track{position:static;margin:16px auto 0;max-width:260px;left:auto;right:auto}
+.car__nav{color:var(--ink);text-shadow:none}
+.car__prev{left:-6px}.car__next{right:-6px}
+
+/* ---------- IDENTIDADE (nome + lugar), centralizada ----------
+   Vem DEPOIS do carrossel e depois do CTA, como na referencia: a obra fala
+   primeiro, a assinatura vem em seguida. */
+.ident{text-align:center;padding:clamp(40px,7vw,78px) clamp(22px,6vw,64px) clamp(52px,9vw,110px)}
+.ident__name{font-family:var(--serif);font-weight:400;font-size:clamp(42px,8.4vw,112px);line-height:.94;
+  letter-spacing:.02em;color:var(--ink)}
+.ident__line{margin-top:clamp(1.6rem,3vw,2.2rem);font-size:clamp(12.5px,1.5vw,15px);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-dim);font-weight:300;line-height:2}
+.ident__line + .ident__line{margin-top:.9rem;color:var(--ink-faint);font-size:clamp(11px,1.3vw,13px)}
+.ident .rule{margin-left:auto;margin-right:auto}
+
+/* ---------- CTA solto, centralizado (o botao da referencia) ---------- */
+.ctaonly{text-align:center;padding:clamp(44px,7vw,86px) clamp(22px,6vw,64px) 0}
+
+/* ---------- WORK: a galeria nao tem texto ----------
+   Na referencia a pagina de obra nao tem uma palavra. A nossa guarda so o
+   titulo, pra pagina nao abrir sem nome e ficar orfa pra quem chega do Google. */
+.phead--tight{padding-bottom:clamp(22px,3.5vw,34px)}
+/* o header e absoluto (herdado do hero): sem hero, o primeiro bloco precisa
+   abrir espaco pra ele, igual as paginas internas fazem com .phead */
+.car--first{padding-top:clamp(96px,13vh,150px)}
+/* nome da faixa de projeto, acima do numero (a referencia nomeia as faixas:
+   nome le melhor que numero solto, o visitante se reconhece antes de contar) */
+.scale__k{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.9rem}
+/* o .car original tinha overflow:hidden (fazia sentido quando ele sangrava ate
+   a borda). Contido, esse hidden decapitava a legenda, que agora vive ABAIXO
+   do quadro. Libera o overflow e abre espaco embaixo pra legenda + o fio. */
+.car{overflow:visible;padding-bottom:clamp(8px,1.5vw,14px)}
+.car__slide .car__cap{padding-bottom:0}
+/* o botao nao precisa atravessar a tela inteira pra ser evidente */
+.cta-xl{max-width:min(420px,calc(100vw - 48px));width:auto}
+@media(max-width:520px){.cta-xl{padding:17px 28px;letter-spacing:.18em;font-size:12px}}
+/* a legenda agora e UMA so e vive entre o quadro e o fio, em fluxo normal */
+.car .car__cap{position:static;padding:16px 2px 0;min-height:2.6em}
+.car__track{margin-top:14px}

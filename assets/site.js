@@ -112,8 +112,14 @@
     var i = 0, timer = null, parado = false;
     var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // legenda unica abaixo do quadro: uma copia por slide empilhava 7 blocos no
+    // mesmo ponto e colidia com o fio de progresso
+    var capT = car.querySelector('.car__capt'), capS = car.querySelector('.car__caps');
+
     var mostra = function (n) {
       i = (n + slides.length) % slides.length;
+      if (capT) capT.textContent = slides[i].getAttribute('data-cap') || '';
+      if (capS) capS.textContent = slides[i].getAttribute('data-sub') || '';
       slides.forEach(function (s, k) {
         var on = (k === i);
         s.classList.toggle('on', on);
@@ -292,11 +298,14 @@
     var compoeMensagem = function () {
       var partes = [];
       var idea = val('message_idea'), place = val('placement'),
-          size = val('size'), refs = val('references');
+          size = val('size'), refs = val('references'), onde = val('location');
       if (idea) partes.push('Idea:\n' + idea);
       if (place) partes.push('Placement: ' + place);
       if (size) partes.push('Approximate size: ' + size);
       if (refs) partes.push('References: ' + refs);
+      // de onde a pessoa vem: quem viaja ate Boca Raton precisa de sessoes
+      // agrupadas, e isso muda a conversa inteira
+      if (onde) partes.push('Based in: ' + onde);
       return partes.join('\n\n');
     };
 
