@@ -63,9 +63,60 @@ fbq('init','3471288283157644');fbq('track','PageView');</script>
     <p class="phead__eyebrow">Admissions</p>
     <h1 class="phead__t">Start a commission.</h1>
     <div class="rule"></div>
-    <p class="phead__sub"><b>Each project begins with an inquiry.</b> Before submitting yours, please review the information below.</p>
+    <p class="phead__sub"><b>Each project begins with an inquiry.</b> Tell me about yours below. How I work follows underneath.</p>
   </section>
 
+  <!-- ===== O FORMULARIO, EM PRIMEIRO PLANO =====
+       Ordem do Rafael (04/10): "inquiry pode vir com formulario em primeiro
+       plano e todo texto e descricao logo abaixo em wide tambem completando
+       toda a tela". Quem ja decidiu escrever nao rola a pagina inteira antes;
+       quem quer entender primeiro acha tudo logo abaixo. -->
+  <section class="sec" id="submit">
+    <div class="inq inq--stack">
+      <div>
+        <p class="sec__eyebrow reveal">Tell me about it</p>
+        <h2 class="sec__title reveal">Submit your project.</h2>
+        <p class="inq__lead reveal">Only one way to reach you is required. Everything else helps me picture the piece before we speak. I read every inquiry personally and reply with the next step, usually a consultation.</p>
+        <div class="inq__contact reveal">
+          <a class="inq__ct" href="https://instagram.com/rafaelcassaro" target="_blank" rel="noopener">Direct message &nbsp;&rarr;&nbsp; <b>@rafaelcassaro</b></a>
+          <a class="inq__ct" href="sms:+15614193996">Text &nbsp;&rarr;&nbsp; <b>(561) 419-3996</b></a>
+        </div>
+      </div>
+      <div class="reveal fwrap">
+        <form class="form" id="inqForm" action="https://formsubmit.co/contato.rafaelcassaro@gmail.com" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New inquiry — rafaelcassaro.com">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://rafaelcassaro.com/inquiry/?sent=1">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <!-- composto pelo JS a partir dos campos do projeto, pra API gravar em notes -->
+          <input type="hidden" name="message" value="">
+
+          <p class="form__step">01 &middot; You</p>
+          <div class="fgrid">
+            <div class="field"><label for="nm">Name</label><input id="nm" type="text" name="name" autocomplete="name"></div>
+            <div class="field"><label for="ig">Instagram</label><input id="ig" type="text" name="instagram" autocomplete="off" placeholder="@yourhandle"></div>
+            <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email"></div>
+            <div class="field"><label for="ph">Mobile phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(561) 000-0000"></div>
+            <div class="field fspan"><label for="lo">Where you are based <i>optional</i></label><input id="lo" type="text" name="location" autocomplete="address-level2" placeholder="City, state or country"></div>
+          </div>
+
+          <p class="form__step" style="margin-top:1.6rem">02 &middot; The project</p>
+          <div class="fgrid">
+            <div class="field"><label for="pl">Placement <i>where on the body</i></label><input id="pl" type="text" name="placement" autocomplete="off" placeholder="Forearm, full back, sleeve&hellip;"></div>
+            <div class="field"><label for="sz">Approximate size</label><input id="sz" type="text" name="size" autocomplete="off" placeholder="Palm-sized, half sleeve, full back&hellip;"></div>
+            <div class="field fspan"><label for="ms">Your idea</label><textarea id="ms" name="message_idea" placeholder="What it is, and what it means to you."></textarea></div>
+            <div class="field fspan"><label for="rf">References <i>optional</i></label><input id="rf" type="text" name="references" autocomplete="off" placeholder="A link, an artist, a photograph you love"></div>
+          </div>
+
+          <p class="form__hint">Photographs of existing work or of the area can be sent later, on Instagram or by text.</p>
+          <p class="form__err" id="inqErr" role="alert" hidden></p>
+          <button class="submit" type="submit" id="sub">Submit your project</button>
+        </form>
+        <div class="thanks" id="thanks" tabindex="-1" role="status">Thank you. Your inquiry is with me and I read every one personally. I'll reply with the next step, usually a consultation, and the consultation is on me.</div>
+      </div>
+    </div>
+  </section>
   <!-- ===== ESCALA DO PROJETO =====
        Faixa de sessoes liberada pro SITE pelo Rafael em 03/10/2026, ao aprovar o
        briefing de reestruturacao. Sempre rotulada como ESTIMATIVA. No DM a regra
@@ -133,7 +184,7 @@ fbq('init','3471288283157644');fbq('track','PageView');</script>
         <div class="crow__price"><span class="crow__amt">$1,300</span><span class="crow__unit">Half day &middot; up to 3h</span></div>
       </article>
     </div>
-    <p class="comm__terms reveal">Looking for an original on paper alongside the piece on skin? That is an <a href="../archive/" style="color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold-fio);text-underline-offset:3px">Archive Commission</a>.</p>
+    
   </section>
 
   <!-- ===== O QUE ERA FAQ, EDITADO =====
@@ -187,53 +238,6 @@ fbq('init','3471288283157644');fbq('track','PageView');</script>
     </div>
   </section>
 
-  <!-- ===== O FORMULARIO ===== -->
-  <section class="sec sec--line" id="submit">
-    <div class="inq">
-      <div>
-        <p class="sec__eyebrow reveal">The last step</p>
-        <h2 class="sec__title reveal">Submit your project.</h2>
-        <p class="inq__lead reveal">Only one way to reach you is required. Everything else helps me picture the piece before we speak. I read every inquiry personally and reply with the next step, usually a consultation.</p>
-        <div class="inq__contact reveal">
-          <a class="inq__ct" href="https://instagram.com/rafaelcassaro" target="_blank" rel="noopener">Direct message &nbsp;&rarr;&nbsp; <b>@rafaelcassaro</b></a>
-          <a class="inq__ct" href="sms:+15614193996">Text &nbsp;&rarr;&nbsp; <b>(561) 419-3996</b></a>
-        </div>
-      </div>
-      <div class="reveal fwrap">
-        <form class="form" id="inqForm" action="https://formsubmit.co/contato.rafaelcassaro@gmail.com" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="New inquiry — rafaelcassaro.com">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://rafaelcassaro.com/inquiry/?sent=1">
-          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <!-- composto pelo JS a partir dos campos do projeto, pra API gravar em notes -->
-          <input type="hidden" name="message" value="">
-
-          <p class="form__step">01 &middot; You</p>
-          <div class="fgrid">
-            <div class="field"><label for="nm">Name</label><input id="nm" type="text" name="name" autocomplete="name"></div>
-            <div class="field"><label for="ig">Instagram</label><input id="ig" type="text" name="instagram" autocomplete="off" placeholder="@yourhandle"></div>
-            <div class="field"><label for="em">Email</label><input id="em" type="email" name="email" autocomplete="email"></div>
-            <div class="field"><label for="ph">Mobile phone</label><input id="ph" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="(561) 000-0000"></div>
-            <div class="field fspan"><label for="lo">Where you are based <i>optional</i></label><input id="lo" type="text" name="location" autocomplete="address-level2" placeholder="City, state or country"></div>
-          </div>
-
-          <p class="form__step" style="margin-top:1.6rem">02 &middot; The project</p>
-          <div class="fgrid">
-            <div class="field"><label for="pl">Placement <i>where on the body</i></label><input id="pl" type="text" name="placement" autocomplete="off" placeholder="Forearm, full back, sleeve&hellip;"></div>
-            <div class="field"><label for="sz">Approximate size</label><input id="sz" type="text" name="size" autocomplete="off" placeholder="Palm-sized, half sleeve, full back&hellip;"></div>
-            <div class="field fspan"><label for="ms">Your idea</label><textarea id="ms" name="message_idea" placeholder="What it is, and what it means to you."></textarea></div>
-            <div class="field fspan"><label for="rf">References <i>optional</i></label><input id="rf" type="text" name="references" autocomplete="off" placeholder="A link, an artist, a photograph you love"></div>
-          </div>
-
-          <p class="form__hint">Photographs of existing work or of the area can be sent later, on Instagram or by text.</p>
-          <p class="form__err" id="inqErr" role="alert" hidden></p>
-          <button class="submit" type="submit" id="sub">Submit your project</button>
-        </form>
-        <div class="thanks" id="thanks" tabindex="-1" role="status">Thank you. Your inquiry is with me and I read every one personally. I'll reply with the next step, usually a consultation, and the consultation is on me.</div>
-      </div>
-    </div>
-  </section>
 
   <footer class="foot">
     <p>&copy; Rafael Cassaro Tattooz &middot; Boca Raton, FL</p>
