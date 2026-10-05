@@ -288,8 +288,8 @@
       if (er) { er.textContent = msg; er.hidden = false; er.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     };
     var ok = function () {
-      try { if (window.gtag) gtag('event', 'generate_lead', { form_location: 'site_inquiry', currency: 'USD', value: 1 }); } catch (e) {}
-      try { if (window.fbq) fbq('track', 'Lead', { content_name: 'site_inquiry' }); } catch (e) {}
+      // sinal de lead para o GTM — ele e quem decide quais tags disparam (GA4, Meta, etc.)
+      try { window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'generate_lead', form_location: 'site_inquiry', currency: 'USD', value: 1 }); } catch (e) {}
       f.style.display = 'none'; th.style.display = 'block';
       try { th.focus(); th.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
     };
@@ -383,7 +383,7 @@
     // fallback nao-AJAX do FormSubmit volta em ?sent=1 — mostrar o agradecimento
     if (/[?&]sent=1/.test(location.search)) {
       f.style.display = 'none'; th.style.display = 'block';
-      try { if (window.gtag) gtag('event', 'generate_lead', { form_location: 'site_inquiry_fallback', currency: 'USD', value: 1 }); } catch (e) {}
+      try { window.dataLayer = window.dataLayer || []; dataLayer.push({ event: 'generate_lead', form_location: 'site_inquiry_fallback', currency: 'USD', value: 1 }); } catch (e) {}
     }
   }
 })();
