@@ -659,3 +659,36 @@ form{display:flex;flex-direction:column;gap:16px}
 .ident{padding-top:clamp(28px,4.5vw,54px)}
 #submit{padding-top:clamp(26px,4vw,44px)}
 .phead--tight{padding-bottom:clamp(14px,2.5vw,24px)}
+
+/* ==========================================================================
+   v7 — HEADER EM FLUXO + NOME AO LADO DO LOGO (ordem do Rafael, 05/10)
+   "na linha onde ficam os links - quero que o retangulo com o carrossel de
+    fotos fique abaixo da linha de links"
+   "onde tem meu logo meu nome deve vir logo ao lado do logo seguindo mesmo
+    padrao de tamanho do logo ou seja balanceando logo e nome"
+   "remover o nome gigante que esta abaixo desse carrossel"
+   ========================================================================== */
+
+/* o header deixa de flutuar SOBRE a imagem e passa a ocupar a propria linha.
+   Com isso o carrossel comeca abaixo dele, que era o pedido. */
+.hdr{position:relative;background:var(--ground);padding-top:18px;padding-bottom:18px}
+.nav a{text-shadow:none}
+/* o veu que existia so pra dar leitura ao menu sobre a foto perde a funcao */
+.car::before{display:none}
+
+/* marca = logo + nome, lado a lado e em peso equivalente */
+.brand{gap:clamp(10px,1.2vw,16px)}
+.brand__name{font-family:var(--serif);font-weight:400;color:var(--ink);
+  font-size:clamp(19px,2.1vw,27px);line-height:1;letter-spacing:.06em;white-space:nowrap}
+@media(max-width:820px){.brand__name{font-size:18px;letter-spacing:.04em}}
+@media(max-width:380px){.brand__name{font-size:16px}}
+
+/* sem o header flutuante, as paginas internas nao precisam mais reservar a
+   faixa de topo que existia pra ele */
+.phead{padding-top:clamp(40px,6vw,76px)}
+
+/* a identidade da home perde o nome gigante e vira a assinatura embaixo */
+.ident{padding-top:clamp(22px,3.5vw,40px)}
+.ident__line--h1{font-family:var(--sans);font-weight:300;font-size:clamp(12.5px,1.5vw,15px);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);line-height:2}
+.ident .rule{margin-top:0}
