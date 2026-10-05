@@ -692,3 +692,34 @@ form{display:flex;flex-direction:column;gap:16px}
 .ident__line--h1{font-family:var(--sans);font-weight:300;font-size:clamp(12.5px,1.5vw,15px);
   letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);line-height:2}
 .ident .rule{margin-top:0}
+
+/* ==========================================================================
+   v8 — ARTIST EM TEXTO CONTINUO (ordem do Rafael, 05/10)
+   "nao gosto de como esta o texto - quero ele todo continuo sem essas quebras"
+   As duas colunas obrigavam a descer ate o rodape e voltar ao topo. O texto
+   volta a ser UMA coluna, contínua, justificada. A largura continua generosa
+   (nada de coluna espremida num canto), mas com teto de leitura: linha de
+   1400px seria larga demais pra o olho achar o comeco da linha seguinte.
+   ========================================================================== */
+@media(min-width:900px){
+  .aprose{column-count:auto;column-gap:normal}
+}
+.aprose{max-width:92ch;margin-left:auto;margin-right:auto}
+.aprose h3{text-align:center}
+.aprose p{margin-bottom:1.6rem}
+/* contínuo SIM, mas ocupando a largura: 92ch deixava a coluna no meio de muito
+   preto, que era a queixa original. Alarga pra faixa do resto do site e sobe o
+   corpo da letra, pra linha ficar larga sem virar uma fileira de 120 caracteres. */
+.aprose{max-width:1080px;padding-left:clamp(22px,6vw,40px);padding-right:clamp(22px,6vw,40px)}
+@media(min-width:900px){
+  .aprose p{font-size:17.5px;line-height:1.95}
+  .aprose h3{font-size:clamp(24px,3.4vw,33px);margin:3.4rem 0 1.6rem}
+}
+/* topo da Inquiry resumido: um titulo so, entao o formulario sobe pra perto */
+#submit{padding-top:clamp(8px,1.5vw,16px)}
+#submit .inq--stack{gap:clamp(18px,2.5vw,26px)}
+/* o campo de preto entre o botao de envio e o texto que vem depois era grande
+   demais: as duas secoes somavam o proprio padding de baixo com o de cima */
+#submit{padding-bottom:clamp(18px,2.5vw,30px)}
+.sec--apos-form{padding-top:clamp(20px,3vw,36px)}
+.sec--apos-form .sec__title{margin-bottom:0}
