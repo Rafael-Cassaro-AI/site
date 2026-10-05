@@ -1,18 +1,4 @@
 <!doctype html><html lang="en"><head>
-<!-- Google tag (gtag.js) — GA4 Rafael Cassaro Tattooz (mesma propriedade do site ao vivo) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P8E5WEGMQY"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P8E5WEGMQY');</script>
-<!-- Meta Pixel — 2026-09-10. Dataset do BM 02 (557027395941876), o mesmo BM das contas
-     de anuncio em USD que rodam de verdade. O pixel antigo (BM 01) ficou pra tras no site
-     da agencia e parou de disparar em 11/jul. Meta nao move dataset entre BMs. -->
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','3471288283157644');fbq('track','PageView');</script>
-<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=3471288283157644&ev=PageView&noscript=1"></noscript>
-<!-- fim do Meta Pixel -->
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -849,7 +835,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // O unico motivo pra nao enviar e a pessoa nao ter deixado NENHUM contato.
     // Spam quem filtra e o FormSubmit no servidor (campo _honey), nunca este codigo.
     var ok=function(){
+      try{(window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form_location:'site_inquiry',currency:'USD',value:1});}catch(e){}
       try{if(window.gtag)gtag('event','generate_lead',{form_location:'site_inquiry',currency:'USD',value:1});}catch(e){}
+      try{(window.dataLayer=window.dataLayer||[]).push({event:'lead_meta',content_name:'site_inquiry'});}catch(e){}
       try{if(window.fbq)fbq('track','Lead',{content_name:'site_inquiry'});}catch(e){}
       f.style.display='none';th.style.display='block';
       try{th.focus();th.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
@@ -931,6 +919,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // fallback nao-AJAX do FormSubmit volta em /?sent=1 — mostrar o agradecimento
   if(/[?&]sent=1/.test(location.search)&&f&&th){
     f.style.display='none';th.style.display='block';
+    try{(window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form_location:'site_inquiry_fallback',currency:'USD',value:1});}catch(e){}
     try{if(window.gtag)gtag('event','generate_lead',{form_location:'site_inquiry_fallback',currency:'USD',value:1});}catch(e){}
   }
 
