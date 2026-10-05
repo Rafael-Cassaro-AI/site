@@ -723,3 +723,21 @@ form{display:flex;flex-direction:column;gap:16px}
 #submit{padding-bottom:clamp(18px,2.5vw,30px)}
 .sec--apos-form{padding-top:clamp(20px,3vw,36px)}
 .sec--apos-form .sec__title{margin-bottom:0}
+
+/* ==========================================================================
+   v9 — ESCALA EM CINZA MEDIO + MENOS AR ENTRE SECOES (Rafael, 05/10)
+   "deixar todo esse retangulo onde vao as descricoes em um cinza medio
+    para dar destaque"  ·  "reduzir esse gap entre as sessoes"
+   ========================================================================== */
+.scale{background:rgba(244,242,238,.10);border-color:rgba(244,242,238,.16)}
+.scale__col{background:#2b2b2d}
+/* o cinza clareia o fundo, entao o ouro do rotulo sobe de 65% pra 85%: a 65%
+   ele caía pra 3,76:1 ali dentro e deixava de ser legivel. A 85% da 5,29:1.
+   O ouro continua so no rotulo, superficie pequena, como manda a doutrina. */
+.scale__col .scale__u{color:rgba(200,177,132,.85)}
+.scale__l li{border-top-color:rgba(244,242,238,.14);color:#c3bfb8}
+
+/* gap entre secoes: cada uma somava o proprio padding de baixo com o de cima
+   da seguinte, e o resultado era um campo de preto entre blocos. */
+.sec--apos-form{padding-bottom:clamp(22px,3vw,34px)}
+.band--comm{padding-top:clamp(34px,4.5vw,54px)}
