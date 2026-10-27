@@ -826,6 +826,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.14});
     document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
   }else{document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});}
+  // ---------- ORIGEM DO VISITANTE (UTM) ----------
+  // PT: pedido do Rafael (27/10): saber de onde veio cada pessoa do formulario.
+  // Na chegada, guarda as UTMs da campanha (e gclid/fbclid/referrer) no navegador
+  // por 90 dias. Assim a origem nao se perde se a pessoa navegar ou voltar outro dia.
+  // Visita sem UTM nao apaga uma origem de campanha ja guardada.
+  var ATTR_KEY='rc_attr',ATTR_DIAS=90;
+  var lerAttr=function(){
+    try{var a=JSON.parse(localStorage.getItem(ATTR_KEY)||'null');
+      if(a&&a.ts&&(Date.now()-a.ts)<ATTR_DIAS*864e5)return a;}catch(e){}
+    return null;
+  };
+  (function(){
+    var q=new URLSearchParams(location.search),a={};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid'].forEach(function(k){
+      var v=q.get(k);if(v)a[k]=v.slice(0,200);
+    });
+    var ref='';try{ref=document.referrer&&new URL(document.referrer).hostname!==location.hostname?document.referrer:'';}catch(e){}
+    var veio=Object.keys(a).length>0;
+    if(!veio&&(lerAttr()||!ref))return;
+    a.referrer=ref.slice(0,300);
+    a.landing_page=(location.origin+location.pathname+location.search).slice(0,300);
+    a.ts=Date.now();
+    try{localStorage.setItem(ATTR_KEY,JSON.stringify(a));}catch(e){}
+  })();
+
   // ---------- FORMULARIO: envio real, com validacao e estado de erro ----------
   var f=document.getElementById('inqForm'),th=document.getElementById('thanks'),er=document.getElementById('inqErr');
   if(f&&th){
@@ -870,6 +895,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         message:val('message'),
         source:'site_inquiry'
       };
+      // origem: o que ficou guardado na chegada; sem nada guardado, o referrer desta visita
+      var at=lerAttr()||{referrer:document.referrer||'',landing_page:location.href};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','referrer','landing_page'].forEach(function(k){
+        if(at[k])payload[k]=at[k];
+      });
 
       var avisaEmail=function(){
         // dispara e esquece: se o e-mail falhar, o lead ja esta salvo no banco.
